@@ -1,4 +1,17 @@
-if (window.location.host === "web.fulcrumapp.com" && document.getElementsByClassName('_s6')[2].getElementsByClassName('_v6')[7] && document.getElementsByClassName('_s6')[2].getElementsByClassName('_v6')[8]) {
+function findMetadata(string) {
+  var labelTags = document.getElementsByTagName("label");
+  var searchText = string;
+  for (var i = 0; i < labelTags.length; i++) {
+    if (labelTags[i].textContent == searchText) {
+      label = labelTags[i];
+      value = label.nextSibling.innerHTML;
+      break;
+    }
+  }
+  return value;
+}
+
+if (window.location.host === "web.fulcrumapp.com") {
   if (!featureCollection) {
     var featureCollection = {
       "type": "FeatureCollection",
@@ -15,8 +28,8 @@ if (window.location.host === "web.fulcrumapp.com" && document.getElementsByClass
       "geometry": {
         "type": "Point",
         "coordinates": [
-          parseFloat(document.getElementsByClassName('_s6')[2].getElementsByClassName('_v6')[8].innerText),
-          parseFloat(document.getElementsByClassName('_s6')[2].getElementsByClassName('_v6')[7].innerText)
+          parseFloat(findMetadata("Longitude:")),
+          parseFloat(findMetadata("Latitude:"))
         ]
       }
     });
